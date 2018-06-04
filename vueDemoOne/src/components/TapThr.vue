@@ -40,7 +40,9 @@
       </tr>
     </table>
     <div class="getAll">
-      <p>总金额：{{priceTotal}}</p>
+      <button class="returnPro" v-on:click="rtnPro">还原删除商品</button>
+      <p>共选择商品{{proNum}}件，总金额为：￥{{priceTotal}}元</p>
+      <button class="payPro">结算</button>
     </div>
   </div>
 </template>
@@ -107,7 +109,9 @@ export default {
         proCount: 0,
         isChecked: false,
         ifShow: true
-      }]
+      }],
+      deletePro: [],
+      proNum: 0
     }
   },
   computed: {
@@ -128,6 +132,7 @@ export default {
             n++
           }
         })
+        this.proNum = n
         if (n == this.proData.length) {
           return true
         }
@@ -154,6 +159,20 @@ export default {
     },
     deleteItem (index) {
       this.proData[index].ifShow = false
+      this.deletePro.push(this.proData[index])
+      this.proData.splice(index, 1)
+    },
+    rtnPro () {
+      if (this.deletePro.length > 0) {
+        this.deletePro.map(it => {
+          it.ifShow = true
+          this.proData.push(it)
+        })
+        confirm('删除商品已还原！')
+      }else{
+        confirm('还未删除商品！')
+      }
+      this.deletePro = []
     }
   },
   components: {
@@ -193,5 +212,38 @@ export default {
   margin: 0;
   line-height: 24px;
   font-size: 14px;
+}
+.getAll{
+  overflow: hidden;
+  margin-top: 20px;
+  border-top: 1px solid #ccc;
+}
+.getAll p{
+  display: inline-block;
+  height: 32px;
+  line-height: 32px;
+  margin: 0;
+}
+.getAll button{
+  width: 120px;
+  background: #3399ff;
+  border: none;
+  border-radius: 5px;
+  height: 30px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 1px;
+}
+.getAll button:hover{
+  font-size: 16px;
+}
+.returnPro{
+  float: left;
+  margin-left: 20px;
+}
+.payPro{
+  float: right;
+  margin-right: 20px;
 }
 </style>

@@ -63,6 +63,7 @@ export default {
 }
 .tapDiv .navDiv{
   width: 100%;
+  border-bottom: 1px solid #ccc;
 }
 .tapDiv .navDiv ul{
   list-style: none;
