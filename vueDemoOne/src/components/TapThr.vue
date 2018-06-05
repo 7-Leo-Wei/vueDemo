@@ -26,7 +26,7 @@
           </div>
         </td>
         <td>
-          <pro-count v-on:proCountAdd="proAdd(index)" v-on:proCountRds="proReduce(index)"></pro-count>
+          <pro-count v-on:proCountAdd="proAdd(index)" v-on:proCountRds="proReduce(index)" :proCnt="item.proCount"></pro-count>
         </td>
         <td>
           <p>￥{{item.price}}</p>

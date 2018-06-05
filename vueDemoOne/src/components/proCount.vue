@@ -9,9 +9,10 @@
 <script>
 export default {
   name: 'HelloWorld',
+  props: ['proCnt'],
   data () {
     return {
-      proCount: 0
+      proCount: this.proCnt
     }
   },
   methods: {
