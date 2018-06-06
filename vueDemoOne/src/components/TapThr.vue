@@ -18,7 +18,7 @@
         <td>
           <div class="proInfoDiv">
             <div class="imgDiv proInfo">
-              <img :src="item.imgUrl" :alt="item.imgTtl" width="200">
+              <img :src="item.imgUrl" :alt="item.imgTtl">
             </div>
             <div class="proInfo">
               <p>{{item.proIntro}}</p>
@@ -49,72 +49,23 @@
 
 <script>
 import proCount from '@/components/proCount'
+import store from '@/vuex/store'
+import { mapState } from 'vuex'
+
 export default {
   props: ['proDta'],
   name: 'HelloWorld',
   data () {
     return {
-      proData: [{
-        name: 'pro_1',
-        imgUrl: 'https://afp.alicdn.com/afp-creative/creative/u124884735/d935c45d3b10f359a0319fa50b895e27.jpg',
-        imgTtl: 'pic1',
-        proIntro: '父组件是使用 props 传递数据给子组件，但如果子组件要把数据传递回去，就需要使用自定义事件！',
-        productCount: 50,
-        price: 200,
-        priceTtl: 0,
-        proCount: 0,
-        isChecked: false,
-        ifShow: true
-      },{
-        name: 'pro_2',
-        imgUrl: 'https://afp.alicdn.com/afp-creative/creative/u124884735/d935c45d3b10f359a0319fa50b895e27.jpg',
-        imgTtl: 'pic2',
-        proIntro: '父组件是使用 props 传递数据给子组件，但如果子组件要把数据传递回去，就需要使用自定义事件！',
-        productCount: 40,
-        price: 100,
-        priceTtl: 0,
-        proCount: 0,
-        isChecked: false,
-        ifShow: true
-      },{
-        name: 'pro_3',
-        imgUrl: 'https://afp.alicdn.com/afp-creative/creative/u124884735/d935c45d3b10f359a0319fa50b895e27.jpg',
-        imgTtl: 'pic3',
-        proIntro: '父组件是使用 props 传递数据给子组件，但如果子组件要把数据传递回去，就需要使用自定义事件！',
-        productCount: 45,
-        price: 230,
-        priceTtl: 0,
-        proCount: 0,
-        isChecked: false,
-        ifShow: true
-      },{
-        name: 'pro_4',
-        imgUrl: 'https://afp.alicdn.com/afp-creative/creative/u124884735/d935c45d3b10f359a0319fa50b895e27.jpg',
-        imgTtl: 'pic4',
-        proIntro: '父组件是使用 props 传递数据给子组件，但如果子组件要把数据传递回去，就需要使用自定义事件！',
-        productCount: 35,
-        price: 120,
-        priceTtl: 0,
-        proCount: 0,
-        isChecked: false,
-        ifShow: true
-      },{
-        name: 'pro_5',
-        imgUrl: 'https://afp.alicdn.com/afp-creative/creative/u124884735/d935c45d3b10f359a0319fa50b895e27.jpg',
-        imgTtl: 'pic5',
-        proIntro: '父组件是使用 props 传递数据给子组件，但如果子组件要把数据传递回去，就需要使用自定义事件！',
-        productCount: 30,
-        price: 160,
-        priceTtl: 0,
-        proCount: 0,
-        isChecked: false,
-        ifShow: true
-      }],
       deletePro: [],
       proNum: 0
     }
   },
   computed: {
+    ...mapState(['prData']),
+    proData () {
+      return this.prData
+    },
     priceTotal () {
       var res = 0
       this.proData.map(it => {
@@ -177,7 +128,8 @@ export default {
   },
   components: {
     "pro-count": proCount
-  }
+  },
+  store
 }
 </script>
 
@@ -207,6 +159,7 @@ export default {
 }
 .proInfoDiv .proInfo img{
   width: 80%;
+  height: 100%;
 }
 .proInfoDiv .proInfo p{
   margin: 0;

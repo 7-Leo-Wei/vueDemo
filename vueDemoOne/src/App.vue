@@ -19,7 +19,9 @@
       </div>
       <div class="contDiv">
         <transition name="fade" mode="out-in">
-          <router-view/>
+          <keep-alive>
+            <router-view/>
+          </keep-alive>
         </transition>
       </div>
     </div>
@@ -39,6 +41,7 @@ export default {
         for (var i = 0; i < li.length; i++) {
           li[i].className = ''
         }
+        // li.map(it => {it.className = ''})
         obj.parentNode.className = 'choosed'
       }
     }
